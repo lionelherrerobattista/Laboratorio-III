@@ -1,17 +1,18 @@
-    var nombre;
-
-    nombre=1234;
     
-    /*
-    if(nombre === "1234")
+    var nombre;
+    
+    var a = function Cargar()
     {
-        alert("el nombre es 1234");
+        var boton = document.getElementById("btn");
+        boton.onclick = Mostrar; //tambien es válido, cuando genero función se genera una variable con el
+                                //mismo nombre
     }
-    else
-    {
-        alert("No es 1234");
-    }*/
 
+
+
+    window.onload = a; //paso la variable como puntero a la función sin () sino ejecuta y es null
+
+    
     function Sumar(num1, num2)
     {
         console.log(num1);
