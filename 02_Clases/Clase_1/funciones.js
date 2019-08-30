@@ -1,16 +1,16 @@
     
     var nombre;
     
-    var a = function Cargar()
+    function Cargar()
     {
         var boton = document.getElementById("btn");
         boton.onclick = Mostrar; //tambien es válido, cuando genero función se genera una variable con el
                                 //mismo nombre
+        boton.addEventListener("click", Mostrar);
     }
 
-
-
-    window.onload = a; //paso la variable como puntero a la función sin () sino ejecuta y es null
+    //window.onload = a; //paso la variable como puntero a la función sin () sino ejecuta y es null
+    window.addEventListener("load", Cargar); //puedo ejecutar más de una funcion
 
     
     function Sumar(num1, num2)
