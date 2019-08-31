@@ -10,7 +10,7 @@ function Cargar()
 }
 
 
-function Sumar(num1, num2)
+function Sumar()
 {
     var resultado;
     var num1 = document.getElementById("numero 1").value;
@@ -23,7 +23,7 @@ function Sumar(num1, num2)
     
 }
 
-function SumarGuardar(num1, num2)
+function SumarGuardar()
 {
     var resultado;
     var num1 = document.getElementById("numero 1").value;
