@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ejemplo Grilla</title>
+    <script type="text/javascript" src="./funciones.js"></script>
+    <link rel="stylesheet" href = "./hoja.css">
+</head>
+<body>
+    <input id="btnAgregarPersona" type="button" value="Agregar Persona">
+    <div id="contenedorPersona" class = "contenedor">
+        <label for="txtNombre">Nombre</label>
+        <br>
+        <input type="text" name="Nombre" id="txtNombre" placeholder="Tu nombre...">
+        <br>
+        <label for="txtApellido">Apellido</label>
+        <br>
+        <input type="text" name="Apellido" id="txtApellido" placeholder="Tu apellido...">
+        <br>
+        <br>
+        <input type="button" value="Guardar" id="btnGuardar">
+        <br>
+            
+    </div>
+    <h2>Lista personas</h2>
+    <table  width = "600">
+        
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Acciones</th>
+            </tr>
+            
+        </thead>
+
+        <tbody id="tbody">
+            <td>Peter</td>
+            <td>Griffin</td>
+            <td><a href="" onclick= Borrar(event)>borrar</a></td>
+
+        </tbody>
+
+        
+
+
+    </table>
+
+    
+    
+
+
+</body>
+</html>
