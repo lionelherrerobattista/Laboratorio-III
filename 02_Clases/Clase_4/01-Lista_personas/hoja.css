@@ -1,4 +1,4 @@
-#btnGuardar
+.btn
 {
     background-color: rgba(3, 163, 3, 0.87);
     color: whitesmoke;
@@ -11,8 +11,14 @@
     cursor: pointer;
 }
 
+a
+{
+    /* para que no queden pegados */
+    margin: 5px;
+}
+
 /* Cuando paso el cursor por encima: */
-#btnGuardar:hover
+.btn:hover
 {
     background-color: rgba(0, 128, 0, 0.76);
 }
@@ -64,12 +70,22 @@ th
 
 .contenedor
 {
+    /* position: absolute; */
     width: 50%;
     border-radius: 5px;
     background-color: rgba(228, 225, 225, 0.822);
     padding: 20px;
+    left: 25%;
+    top: 25%;
+    position: fixed;
+    
     
 }
+
+ /* #tabla
+{
+    position: relative;
+}  */
 
 label
 {
