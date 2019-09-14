@@ -114,6 +114,7 @@ function Editar(e)
 
     MostrarIngreso();
 
+    // modifico el listener
     btnGuardar.removeEventListener("click", GuardarPersona);
     btnGuardar.addEventListener("click", Modificar);
 }

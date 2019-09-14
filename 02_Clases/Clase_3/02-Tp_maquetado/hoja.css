@@ -1,7 +1,23 @@
+html
+{
+    font-size: 62.5%;
+}
+
 header 
 {
+    /* Con path relativo */
     background-image: url(./img/header.jpg);
+    /* me centra la imagen medio vertical y horizontal*/
+    background-position: center center;
+    /* cubro los costados */
+    background-size: cover;
+    /* 100 de la pantalla - vh -> del viewpoint (dispositivo) */
+    height: 100vh;
     
+}
+body
+{
+    margin: 0px;
 }
 
 
@@ -19,7 +35,8 @@ header
 {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 1rem 0 3rem 0;
     flex-grow: 1;
     box-sizing: border-box;
 }
