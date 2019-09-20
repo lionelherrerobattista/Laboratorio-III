@@ -1,7 +1,8 @@
 html
 {
-    font-size: 62.5%;
+    font-size: 62.5%; /* rem como multiplo de 10 en todo el documento */
 }
+
 
 header 
 {
@@ -13,115 +14,139 @@ header
     background-size: cover;
     /* 100 de la pantalla - vh -> del viewpoint (dispositivo) */
     height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    box-sizing: border-box;
+    padding: 2rem 5rem 2rem 5rem;
     
 }
+
 body
 {
     margin: 0px;
 }
 
 
-#encabezado
+
+div.encabezado
 {
     display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    height: 25vh;
-    box-sizing: border-box;
-
-}
-
-.header-principal
-{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 1rem 0 3rem 0;
-    flex-grow: 1;
-    box-sizing: border-box;
-}
-
-#logo-header
-{
-    display: flex;
-    flex-grow: 1;
-    padding-left: 15%;
-     
-}
-
-#menu-header
-{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    flex-grow: 1;
-    padding-left: 20%;
-    padding-right: 20%;
-    color: white;
-}
-
-.header-secundario
-{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: stretch;
-    box-sizing: border-box;
-    color: white;
-    font-size: 15pt;
-    font-family: arial;
-    font-weight: bold;
-    padding-left: 15%;
-    padding-bottom: 2%;
-    flex-grow: 2;
-    box-sizing: border-box;
-}
-
-.info
-{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: space-around;
-    padding-top: 2%;
-    padding-right: 20%;
-    padding-left: 20%;
-
-}
-
-.info-titulo
-{
-    display: flex;
-    flex-grow: 1;
     flex-direction: row;
     justify-content: center;
+    box-sizing: border-box;
+}
+
+
+#logo
+{
+
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+#imagenLogo
+{
+    height: auto;
+    max-width: 100%;
+}
+
+nav
+{
+    
+    display: flex;
+    flex-grow: 1;
+    padding: 2rem 20rem 0 20rem;
+    justify-content: space-around;
+    
+
+}
+
+a
+{
+
+    text-decoration: none;    
+    display: inline-block;
+    color: white;
+    font-size: 1vw;
+
+}
+
+.tituloHeader
+{
+    margin: 3rem 0 0 20rem;
+
+}
+
+h1
+{
+    color: white;
+    font-family: Arial;
+    text-align: left;
+    font-size: 2.5vw;
+}
+
+
+h2.info-titulo
+{
+    font-weight: normal;
+    text-align: center;
     color: grey;
     font-family: 'Times New Roman';
     padding-bottom: 2%;
-    font-size: 20pt;
+    font-size: 2vw;
 }
 
 
-.info-detalle
+.masSobreNosotros
 {
     display: flex;
-    flex-grow: 2;
     flex-direction: row;
     justify-content: center;
-    align-items: stretch;
+    margin: 0 25rem 0 25rem;
+    box-sizing: border-box;
     
 }
 
 .box
 {
     display: flex;
+    flex-grow: 1;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    padding-left: 1%;
-    padding-right: 1%;
+    padding: 1rem 1rem 2rem 1rem;
     box-sizing: border-box;
+
+}
+
+.imgMasSobreNosotros
+{
+    max-width: 100%;
+    height: auto;
+}
+
+h3
+{
+    font-size: 1.5vw;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+.info-descripcion
+{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    font-size: 1vw;
+}
+
+em
+{
+    color: green;
+    font-style: normal;
 
 }
 
@@ -136,7 +161,7 @@ body
     margin-right: 1%;
     border-color: grey;
     border-style: solid;
-    border-width: 1px;
+    border-width: 0.1vh;
     box-sizing: border-box;
 }
 
@@ -151,26 +176,36 @@ body
 .box-texto
 {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 4%;
-    
+    flex-direction: column; 
+    padding: 0 4rem 2rem 4rem;
     background-color: rgba(224, 224, 224, 0.931);
+
     box-sizing: border-box;
 }
+
+p.txtBoxCasas
+{
+    text-align: left;
+}
+
+input[type="button"].btnVerPropiedad
+{
+    margin: 0 5rem 0 5rem;
+    box-sizing: border-box;
+}
+
 
 p
 {
     font-family: Arial;
-    font-size: 10pt;
+    font-size: 2vh;
     text-align: center;
 }
 
 img
 {
     max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+    height: auto;
 }
 
 input[type="button"]
@@ -181,8 +216,8 @@ input[type="button"]
     font-weight: bold;
     border: none;
     text-align: center;
-    width:  250px;
-    height: 40px;
+    width:  25vh;
+    height: 5vh;
 
 }
 
@@ -202,14 +237,77 @@ input[type="button"]
     padding-bottom: 4%;
 }
 
-.img-servicios
-{
-    max-width: 80%;
-    max-height: 80%;
-    object-fit: contain;
-}
 .precio
 {
     padding-top:4%;
     padding-bottom: 4%;
+}
+
+#btnVerTodas
+{
+    background-color: green;
+    margin: 5% 0% 5% 80%;
+    
+}
+
+h2.formulario
+{
+    font-size: 1.8vw;
+}
+
+section.formulario
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* Con path relativo */
+    background-image: url(./img/header.jpg);
+    /* me centra la imagen medio vertical y horizontal*/
+    background-position: center center;
+    /* cubro los costados */
+    background-size: cover;
+    height: 30rem;
+    padding: 5rem 30rem 5rem 30rem;
+    box-sizing: border-box;
+
+    color: white;
+}
+
+p.formulario
+{
+
+    text-align: left;
+}
+
+
+footer
+{
+    display: flex;
+    flex-direction: row;
+    /* Con path relativo */
+    background-image: url(./img/header.jpg);
+    /* me centra la imagen medio vertical y horizontal*/
+    background-position: center center;
+    /* cubro los costados */
+    background-size: cover;
+    padding: 5rem;
+    box-sizing: border-box;
+
+
+}
+
+
+.divFooter
+{
+    display:flex;
+    flex-grow: 1;
+    justify-content: center;
+    box-sizing: border-box;
+
+}
+
+.pFooter
+{
+    color: white;
+
 }
