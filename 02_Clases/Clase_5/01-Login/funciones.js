@@ -8,9 +8,6 @@ function CargarBotones()
     btnEnviar.addEventListener("click", VerificarUsuario);
     btnLimpiar.addEventListener("click", LimpiarTexto);
 
-    var imgLoading = document.getElementById("imagen-loading")
-
-    imgLoading.style.visibility = "hidden";
 
 }
 
@@ -22,9 +19,11 @@ function VerificarUsuario()
     //Recupero Objetos:
     var txtUsuario = document.getElementById("txtUsuario");
     var pwdPass = document.getElementById("pwdPass");
-    var dirhttp = "http://localhost:3000/loginUsuario"
+
     var http = new XMLHttpRequest();
-    var imgLoading = document.getElementById("imagen-loading")
+    var dirhttp = "http://localhost:3000/loginUsuario";
+
+    var imgLoading = document.getElementById("imagen-loading");//gif loading
 
     imgLoading.style.visibility = "visible";
 
@@ -57,8 +56,11 @@ function VerificarUsuario()
     // dirhttp += "&pass=" + pwdPass.value;
 
     
-    http.open("POST", "http://localhost:3000/loginUsuario");
+    http.open("POST", dirhttp);
+
+    //Cuando uso POST, aviso que paso texto plano:
     http.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
+
     http.send("usr=" + txtUsuario.value + "&pass=" + pwdPass.value);
 
 }
