@@ -7,7 +7,11 @@ function CargarBotones()
 
     btnEnviar.addEventListener("click", VerificarUsuario);
     btnLimpiar.addEventListener("click", LimpiarTexto);
-   
+
+    var imgLoading = document.getElementById("imagen-loading")
+
+    imgLoading.style.visibility = "hidden";
+
 }
 
 
@@ -18,20 +22,27 @@ function VerificarUsuario()
     //Recupero Objetos:
     var txtUsuario = document.getElementById("txtUsuario");
     var pwdPass = document.getElementById("pwdPass");
-    var dirhttp = "http://localhost:3000/loginUsuario?"
+    var dirhttp = "http://localhost:3000/loginUsuario"
     var http = new XMLHttpRequest();
+    var imgLoading = document.getElementById("imagen-loading")
+
+    imgLoading.style.visibility = "visible";
 
     http.onreadystatechange = function()
     {
+ 
         console.log("Llegó respuesta", http.readyState, http.status);
 
         if(http.readyState === 4 && http.status === 200)
         {
             console.log("Tenemos respuesta", http.responseText);
 
+            imgLoading.style.visibility = "hidden";
+
             if(http.responseText === "true")
             {
                 alert("usuario correcto");
+
             }
             else
             {
@@ -41,12 +52,14 @@ function VerificarUsuario()
         }
     }
 
-    //método get, paso los parámetros por la dirección http
-    dirhttp += "usr=" + txtUsuario.value;
-    dirhttp += "&pass=" + pwdPass.value;
+    //método get, paso los parámetros por la dirección http en open
+    // dirhttp += "?usr=" + txtUsuario.value;
+    // dirhttp += "&pass=" + pwdPass.value;
 
-    http.open("GET", dirhttp);
-    http.send();
+    
+    http.open("POST", "http://localhost:3000/loginUsuario");
+    http.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
+    http.send("usr=" + txtUsuario.value + "&pass=" + pwdPass.value);
 
 }
 
