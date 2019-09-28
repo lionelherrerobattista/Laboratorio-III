@@ -28,6 +28,10 @@ function GuardarPersona()
     var apellido = document.getElementById("txtApellido");
     var telefono = document.getElementById("txtTelefono");
     var fecha = document.getElementById("txtFecha");
+
+    var imgLoading = document.getElementById("imagen-loading");//gif loading
+
+    
     
     if( nombre.value == "" || apellido.value == "")
     {
@@ -40,6 +44,7 @@ function GuardarPersona()
         var contenedorPersona = document.getElementById("contenedorPersona");
         var persona = {"nombre" : nombre.value, "apellido": apellido.value, "fecha" : fecha.value, "telefono" : telefono.value};
 
+        imgLoading.style.visibility = "visible";
         nombre.className = "sinError";
         apellido.className = "sinError";
 
@@ -68,6 +73,8 @@ function GuardarPersona()
 
                 var respuesta = JSON.parse(http.responseText);
                 
+                imgLoading.style.visibility = "hidden";
+
                 if(respuesta["respuesta"] === "ok")
                 {
                     
