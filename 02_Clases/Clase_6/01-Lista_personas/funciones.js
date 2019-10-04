@@ -40,25 +40,80 @@ function GuardarPersona()
         alert("Debe agregar nombre y apellido");
     }
     else
-    {       
-        var contenedorPersona = document.getElementById("contenedorPersona");
+    {   
+        //Objeto JSON    
         var persona = {"nombre" : nombre.value, "apellido": apellido.value, "fecha" : fecha.value, "telefono" : telefono.value};
 
+        var contenedorPersona = document.getElementById("contenedorPersona");  
+        var tbody = document.getElementById("tbody");
+        
+        var fila;
+        var columna;
+        var textoTabla;
+        var enlace;
+        
+        //Muestro el spinner
         imgLoading.style.visibility = "visible";
+        
+        //Clases
         nombre.className = "sinError";
         apellido.className = "sinError";
 
-        document.getElementById("tbody").innerHTML += "<tr><td>" + nombre.value + "</td><td>"
-            + apellido.value + "</td><td>" + telefono.value + "</td><td>" + fecha.value + "</td><td>" +
-            "<a href='' onclick= Borrar(event)>borrar</a><a href='' onclick= Editar(event)>editar</a>" +
-            "</td></</tr>";
+        //Creo la tabla:
 
+        //Columna nombre:
+        fila = document.createElement("tr");
+        columna = document.createElement("td");
+        textoTabla = document.createTextNode(persona.nombre);
+        columna.appendChild(textoTabla);
+        fila.appendChild(columna);
+
+        //Columna apellido:
+        columna = document.createElement("td");
+        textoTabla = document.createTextNode(persona.apellido);
+        columna.appendChild(textoTabla);
+        fila.appendChild(columna);
+
+        //Columna teléfono:
+        columna = document.createElement("td");
+        textoTabla = document.createTextNode(persona.telefono);
+        columna.appendChild(textoTabla);
+        fila.appendChild(columna);
+
+        //Columna fecha:
+        columna = document.createElement("td");
+        textoTabla = document.createTextNode(persona.fecha);
+        columna.appendChild(textoTabla);
+        fila.appendChild(columna);
+
+        //Columna Acciones:
+        columna = document.createElement("td");
+        enlace = document.createElement("a");
+        enlace.setAttribute("href", "''");
+        enlace.setAttribute("onclick", "Borrar(event)");
+        textoTabla = document.createTextNode("Borrar");
+        enlace.appendChild(textoTabla);
+        columna.appendChild(enlace);
+        fila.appendChild(columna);
+
+        enlace = document.createElement("a");
+        enlace.setAttribute("href", "''");
+        enlace.setAttribute("onclick", "Editar(event)");
+        textoTabla = document.createTextNode("Editar");
+        enlace.appendChild(textoTabla);
+        columna.appendChild(enlace);
+        fila.appendChild(columna);
+
+        //Adjunto todo al tbody:
+        tbody.appendChild(fila);
+
+        //Limpio los casilleros del contenedor
         nombre.value = ""; 
         apellido.value = "";
         telefono.value = "";
         fecha.value = "";
 
-        //guardo en el servidor
+        //Guardo en el servidor
         var http = new XMLHttpRequest();
         var dirhttp = "http://localhost:3000/nuevaPersona";
 
@@ -100,6 +155,7 @@ function GuardarPersona()
         //paso el JSON a string
         http.send(JSON.stringify(persona));
 
+        //Vuelvo a ocultar el contenedor
         contenedorPersona.style.visibility = "hidden";
     }
     
@@ -188,16 +244,50 @@ function Modificar()
     }
     else
     {       
-        var contenedorPersona = document.getElementById("contenedorPersona");
+        var contenedorPersona = document.getElementById("contenedorPersona");    
+        var fila = document.createElement("<tr>");
+        var columna = document.createElement("<td>");
+        var textoTabla = document.createTextNode(nombre.value);
+        var linkBorrar = document.createElement("<a>");
+        var linkEditar = document.createElement("<a>");
+
 
         nombre.className = "sinError";
         apellido.className = "sinError";
 
         //fila variable global
-        fila.innerHTML = "<tr><td>" + nombre.value + "</td><td>"
-            + apellido.value + "</td><td>" +
-            "<a href='' onclick= Borrar(event)>borrar</a><a href='' onclick= Editar(event)>editar</a>" +
-            "</td></</tr>";
+
+        
+        // fila.innerHTML = "<tr><td>" + nombre.value + "</td><td>"
+        //     + apellido.value + "</td><td>" +
+        //     "<a href='' onclick= Borrar(event)>borrar</a><a href='' onclick= Editar(event)>editar</a>" +
+        //     "</td></</tr>";
+
+        columna.appendChild(textoTabla);
+        fila.appendChild(columna);
+
+
+        columna = document.createElement("<td>");
+        textoTabla = document.createTextNode(apellido.value);
+
+        columna.appendChild(textoTabla);
+        fila.appendChild(columna);
+
+        columna = document.createElement("<td>");
+        linkBorrar.setAttribute("href", "''");
+        linkBorrar.setAttribute("onclick", "Borrar(event)");
+        textoTabla = document.createTextNode("Borrar");
+        linkBorrar.appendChild(textoTabla);
+        columna.appendChild(linkBorrar);
+        fila.appendChild(columna);
+
+
+        linkEditar.setAttribute("href", "''");
+        linkEditar.setAttribute("onclick", "Editar(event)");
+        textoTabla = document.createTextNode("Editar");
+        linkEditar.appendChild(textoTabla);
+        columna.appendChild(linkEditar);
+        fila.appendChild(columna);
 
         nombre.value = ""; 
         apellido.value = "";
