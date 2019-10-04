@@ -1,4 +1,7 @@
-var fila;
+var filaParaModificar;
+
+window.addEventListener("load", CargarBoton);
+window.addEventListener("load", CargarDesdeServidor);
 
 function CargarBoton()
 {
@@ -13,14 +16,7 @@ function CargarBoton()
     btnCancelar.addEventListener("click", MostrarIngreso);
     btnAgregarPersona.addEventListener("click", MostrarIngreso);
 
-    
-
-
 }
-
-window.addEventListener("load", CargarBoton);
-window.addEventListener("load", CargarLista);
-
 
 function GuardarPersona()
 {
@@ -35,6 +31,7 @@ function GuardarPersona()
         apellido.className = "error";
         telefono.className = "error";
         fecha.className = "error";
+        
         alert("Debe agregar nombre y apellido");
     }
     else
@@ -42,13 +39,22 @@ function GuardarPersona()
         //Objeto JSON    
         var persona = {"nombre" : nombre.value, "apellido": apellido.value, "fecha" : fecha.value, "telefono" : telefono.value};
         var contenedorPersona = document.getElementById("contenedorPersona");  
+        var tbody;
+        var fila;
+
+        tbody = document.getElementById("tbody");
      
         //Clases
         nombre.className = "sinError";
         apellido.className = "sinError";
+        telefono.className = "sinError";
+        fecha.className = "sinError";
 
         //Creo la tabla:
-        CrearTabla(persona);
+        fila = CrearFila(persona);
+
+        //Adjunto todo al tbody:
+        tbody.appendChild(fila);
 
         //Limpio los casilleros del contenedor
         nombre.value = ""; 
@@ -65,6 +71,7 @@ function GuardarPersona()
     
 }
 
+//Funcion que muestra u oculta el boton
 function MostrarIngreso()
 {
     var contenedorPersona = document.getElementById("contenedorPersona");
@@ -80,6 +87,7 @@ function MostrarIngreso()
     
 }
 
+//Función que borra una línea de la tabla
 function Borrar(e)
 {
  
@@ -87,10 +95,6 @@ function Borrar(e)
     console.log(e.target);
     console.log(e.target.parentNode); //me muestra el padre
     console.log(e.target.parentNode.parentNode); //me muestra el padre del padre
-
-    //recupero el componente y lo cambio
-    // var tagA = e.target.parentNode;
-    // tagA.innerHTML = "Otra Cosa";
 
     //saco la fila
     e.target.parentNode.parentNode.innerHTML = "";
@@ -103,7 +107,8 @@ function Editar(e)
     var i;
     var txtNombre = document.getElementById("txtNombre"); 
     var txtApellido = document.getElementById("txtApellido");
-    var btnGuardar = document.getElementById("btnGuardar");
+    var txtTelefono = document.getElementById("txtTelefono");
+    var txtFecha = document.getElementById("txtFecha");
 
     // le saco el evento por defecto (redireccionar a href)
     e.preventDefault();
@@ -112,20 +117,13 @@ function Editar(e)
     var hijos = e.target.parentNode.parentNode.children;
 
     // guardo la fila en una variable global
-    fila = e.target.parentNode.parentNode;
+    filaParaModificar = e.target.parentNode.parentNode;
 
     // recupero los objetos:
-    for(i = 0; i < hijos.length-1; i++)
-    {
-        if(i == 0)
-        {
-            txtNombre.value = hijos[i].innerHTML;
-        }
-        else
-        {
-            txtApellido.value = hijos[i].innerHTML;
-        }
-    }
+    txtNombre.value = hijos[0].innerHTML;
+    txtApellido.value = hijos[1].innerHTML;
+    txtTelefono.value = hijos[2].innerHTML;
+    txtFecha.value = hijos[3].innerHTML;
 
     MostrarIngreso();
 
@@ -138,80 +136,59 @@ function Modificar()
 {
     var nombre = document.getElementById("txtNombre"); 
     var apellido = document.getElementById("txtApellido");
-    
-    
+    var telefono = document.getElementById("txtTelefono");
+    var fecha = document.getElementById("txtFecha");
+        
     if( nombre.value == "" || apellido.value == "")
     {
         nombre.className = "error";
         apellido.className = "error";
+        telefono.className = "error";
+        fecha.className = "error";
         alert("Debe agregar nombre y apellido");
     }
     else
     {       
-        var contenedorPersona = document.getElementById("contenedorPersona");    
-        var fila = document.createElement("<tr>");
-        var columna = document.createElement("<td>");
-        var textoTabla = document.createTextNode(nombre.value);
-        var linkBorrar = document.createElement("<a>");
-        var linkEditar = document.createElement("<a>");
 
+        var persona = {"nombre" : nombre.value, "apellido": apellido.value, "fecha" : fecha.value, "telefono" : telefono.value};
+        var contenedorPersona;
+        var tbody;
+        var filaModificada;
 
+        contenedorPersona = document.getElementById("contenedorPersona"); 
+        tbody = document.getElementById("tbody");
+     
+        //Clases
         nombre.className = "sinError";
         apellido.className = "sinError";
+        telefono.className = "sinError";
+        fecha.className = "sinError";
 
-        //fila variable global
+        //Creo la tabla:
+        filaModificada = CrearFila(persona);
 
-        
-        // fila.innerHTML = "<tr><td>" + nombre.value + "</td><td>"
-        //     + apellido.value + "</td><td>" +
-        //     "<a href='' onclick= Borrar(event)>borrar</a><a href='' onclick= Editar(event)>editar</a>" +
-        //     "</td></</tr>";
+        tbody.replaceChild(filaModificada, filaParaModificar);
 
-        columna.appendChild(textoTabla);
-        fila.appendChild(columna);
-
-
-        columna = document.createElement("<td>");
-        textoTabla = document.createTextNode(apellido.value);
-
-        columna.appendChild(textoTabla);
-        fila.appendChild(columna);
-
-        columna = document.createElement("<td>");
-        linkBorrar.setAttribute("href", "''");
-        linkBorrar.setAttribute("onclick", "Borrar(event)");
-        textoTabla = document.createTextNode("Borrar");
-        linkBorrar.appendChild(textoTabla);
-        columna.appendChild(linkBorrar);
-        fila.appendChild(columna);
-
-
-        linkEditar.setAttribute("href", "''");
-        linkEditar.setAttribute("onclick", "Editar(event)");
-        textoTabla = document.createTextNode("Editar");
-        linkEditar.appendChild(textoTabla);
-        columna.appendChild(linkEditar);
-        fila.appendChild(columna);
-
+        //Limpio los casilleros del contenedor
         nombre.value = ""; 
         apellido.value = "";
-
+        telefono.value = "";
+        fecha.value = "";
+        
+        //Vuelvo a ocultar el contenedor
         contenedorPersona.style.visibility = "hidden";
-
-        console.log("edito");
 
         btnGuardar.removeEventListener("click", Modificar);
         btnGuardar.addEventListener("click", GuardarPersona);
     }
 
-
-
 }
 
 
-function CargarLista()
+function CargarDesdeServidor()
 {
-    
+    var tbody = document.getElementById("tbody");
+ 
     var http = new XMLHttpRequest();
 
     var dirhttp = "http://localhost:3000/personas";
@@ -235,21 +212,17 @@ function CargarLista()
            {
                var persona = lista[i];
 
-               CrearTabla(persona);
+               var fila = CrearFila(persona);
+
+               tbody.appendChild(fila);
 
            }
 
-           //llamo funcion para pasar objeto a row
-
-        }
-
-       
-        
+        }       
 
     }
 
     http.send();
-
 
 }
 
@@ -302,11 +275,10 @@ function GuardarEnServidor(persona)
 }
 
 
-//Funcion que crea una tabla usando DOM, parametro: objeto con los datos
-function CrearTabla(persona)
+//Funcion que crea una fila usando DOM, parametro: objeto con los datos
+function CrearFila(persona)
 {
-
-    var tbody = document.getElementById("tbody");      
+  
     var fila;
     var columna;
     var textoTabla;
@@ -359,8 +331,9 @@ function CrearTabla(persona)
     columna.appendChild(enlace);
     fila.appendChild(columna);
 
-    //Adjunto todo al tbody:
-    tbody.appendChild(fila);
+
+    return fila;
+
 }
 
 
