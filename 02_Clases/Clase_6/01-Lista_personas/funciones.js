@@ -29,83 +29,26 @@ function GuardarPersona()
     var telefono = document.getElementById("txtTelefono");
     var fecha = document.getElementById("txtFecha");
 
-    var imgLoading = document.getElementById("imagen-loading");//gif loading
-
-    
-    
     if( nombre.value == "" || apellido.value == "")
     {
         nombre.className = "error";
         apellido.className = "error";
+        telefono.className = "error";
+        fecha.className = "error";
         alert("Debe agregar nombre y apellido");
     }
     else
     {   
         //Objeto JSON    
         var persona = {"nombre" : nombre.value, "apellido": apellido.value, "fecha" : fecha.value, "telefono" : telefono.value};
-
         var contenedorPersona = document.getElementById("contenedorPersona");  
-        var tbody = document.getElementById("tbody");
-        
-        var fila;
-        var columna;
-        var textoTabla;
-        var enlace;
-        
-        //Muestro el spinner
-        imgLoading.style.visibility = "visible";
-        
+     
         //Clases
         nombre.className = "sinError";
         apellido.className = "sinError";
 
         //Creo la tabla:
-
-        //Columna nombre:
-        fila = document.createElement("tr");
-        columna = document.createElement("td");
-        textoTabla = document.createTextNode(persona.nombre);
-        columna.appendChild(textoTabla);
-        fila.appendChild(columna);
-
-        //Columna apellido:
-        columna = document.createElement("td");
-        textoTabla = document.createTextNode(persona.apellido);
-        columna.appendChild(textoTabla);
-        fila.appendChild(columna);
-
-        //Columna teléfono:
-        columna = document.createElement("td");
-        textoTabla = document.createTextNode(persona.telefono);
-        columna.appendChild(textoTabla);
-        fila.appendChild(columna);
-
-        //Columna fecha:
-        columna = document.createElement("td");
-        textoTabla = document.createTextNode(persona.fecha);
-        columna.appendChild(textoTabla);
-        fila.appendChild(columna);
-
-        //Columna Acciones:
-        columna = document.createElement("td");
-        enlace = document.createElement("a");
-        enlace.setAttribute("href", "''");
-        enlace.setAttribute("onclick", "Borrar(event)");
-        textoTabla = document.createTextNode("Borrar");
-        enlace.appendChild(textoTabla);
-        columna.appendChild(enlace);
-        fila.appendChild(columna);
-
-        enlace = document.createElement("a");
-        enlace.setAttribute("href", "''");
-        enlace.setAttribute("onclick", "Editar(event)");
-        textoTabla = document.createTextNode("Editar");
-        enlace.appendChild(textoTabla);
-        columna.appendChild(enlace);
-        fila.appendChild(columna);
-
-        //Adjunto todo al tbody:
-        tbody.appendChild(fila);
+        CrearTabla(persona);
 
         //Limpio los casilleros del contenedor
         nombre.value = ""; 
@@ -114,47 +57,8 @@ function GuardarPersona()
         fecha.value = "";
 
         //Guardo en el servidor
-        var http = new XMLHttpRequest();
-        var dirhttp = "http://localhost:3000/nuevaPersona";
-
-        http.onreadystatechange = function()
-        {
-    
-            console.log("Llegó respuesta", http.readyState, http.status);
-
-            if(http.readyState === 4 && http.status === 200)
-            {
-                console.log("Tenemos respuesta", http.responseText);
-
-                var respuesta = JSON.parse(http.responseText);
-                
-                imgLoading.style.visibility = "hidden";
-
-                if(respuesta["respuesta"] === "ok")
-                {
-                    
-                    alert("persona guardada");
-
-                }
-                else
-                {
-
-                    alert("no se guardo la persona");
-                }
-            }
-        }
-
-        console.log(persona);
-
+        GuardarEnServidor(persona);
         
-        http.open("POST", dirhttp);
-
-        //Cuando uso POST, le tengo que avisar que le paso un JSON:
-        http.setRequestHeader('Content-Type', "application/JSON"); 
-
-        //paso el JSON a string
-        http.send(JSON.stringify(persona));
-
         //Vuelvo a ocultar el contenedor
         contenedorPersona.style.visibility = "hidden";
     }
@@ -307,7 +211,6 @@ function Modificar()
 
 function CargarLista()
 {
-    var tabla = document.getElementById("tbody");
     
     var http = new XMLHttpRequest();
 
@@ -332,10 +235,7 @@ function CargarLista()
            {
                var persona = lista[i];
 
-               tabla.innerHTML += "<tr><td>" + persona.nombre + "</td><td>"
-               + persona.apellido + "</td><td>" + persona.telefono + "</td><td>" + persona.fecha + "</td><td>" +
-               "<a href='' onclick= Borrar(event)>borrar</a><a href='' onclick= Editar(event)>editar</a>" +
-               "</td></</tr>";
+               CrearTabla(persona);
 
            }
 
@@ -351,6 +251,116 @@ function CargarLista()
     http.send();
 
 
+}
+
+function GuardarEnServidor(persona)
+{
+    var http = new XMLHttpRequest();
+    var dirhttp = "http://localhost:3000/nuevaPersona";
+    var imgLoading = document.getElementById("imagen-loading"); //gif loading
+
+    //Muestro el spinner
+    imgLoading.style.visibility = "visible";
+
+    http.onreadystatechange = function()
+    {
+
+        console.log("Llegó respuesta", http.readyState, http.status);
+
+        if(http.readyState === 4 && http.status === 200)
+        {
+            console.log("Tenemos respuesta", http.responseText);
+
+            var respuesta = JSON.parse(http.responseText);
+            
+            imgLoading.style.visibility = "hidden";
+
+            if(respuesta["respuesta"] === "ok")
+            {
+                
+                alert("persona guardada");
+
+            }
+            else
+            {
+
+                alert("no se guardo la persona");
+            }
+        }
+    }
+
+    console.log(persona);
+
+    
+    http.open("POST", dirhttp);
+
+    //Cuando uso POST, le tengo que avisar que le paso un JSON:
+    http.setRequestHeader('Content-Type', "application/JSON"); 
+
+    //paso el JSON a string
+    http.send(JSON.stringify(persona));
+}
+
+
+//Funcion que crea una tabla usando DOM, parametro: objeto con los datos
+function CrearTabla(persona)
+{
+
+    var tbody = document.getElementById("tbody");      
+    var fila;
+    var columna;
+    var textoTabla;
+    var enlace;
+
+    //Creo la tabla:
+    
+    //Fila:
+    fila = document.createElement("tr");
+    
+    //Columna nombre:
+    columna = document.createElement("td");
+    textoTabla = document.createTextNode(persona.nombre);
+    columna.appendChild(textoTabla);
+    fila.appendChild(columna);
+
+    //Columna apellido:
+    columna = document.createElement("td");
+    textoTabla = document.createTextNode(persona.apellido);
+    columna.appendChild(textoTabla);
+    fila.appendChild(columna);
+
+    //Columna teléfono:
+    columna = document.createElement("td");
+    textoTabla = document.createTextNode(persona.telefono);
+    columna.appendChild(textoTabla);
+    fila.appendChild(columna);
+
+    //Columna fecha:
+    columna = document.createElement("td");
+    textoTabla = document.createTextNode(persona.fecha);
+    columna.appendChild(textoTabla);
+    fila.appendChild(columna);
+
+    //Columna Acciones:
+    columna = document.createElement("td");
+    enlace = document.createElement("a");
+    enlace.setAttribute("href", "''");
+    enlace.setAttribute("onclick", "Borrar(event)");
+    textoTabla = document.createTextNode("Borrar");
+    enlace.appendChild(textoTabla);
+    columna.appendChild(enlace);
+    fila.appendChild(columna);
+
+    enlace = document.createElement("a");
+    enlace.setAttribute("href", "''");
+    enlace.setAttribute("onclick", "Editar(event)");
+    textoTabla = document.createTextNode("Editar");
+    enlace.appendChild(textoTabla);
+    columna.appendChild(enlace);
+    fila.appendChild(columna);
+
+    //Adjunto todo al tbody:
+    tbody.appendChild(fila);
 }
 
 
