@@ -1,0 +1,41 @@
+#divLogin
+{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+     
+}
+
+input
+{
+    width:  20rem;
+    height: 2rem;
+    border-radius: 0.2rem;
+    color: grey;
+}
+
+#btnSignIn
+{
+    margin-top: 0.5rem;
+    text-align: center;
+    border-style: none;
+    color: white;
+    background-color: rgb(0, 132, 255);
+   
+}
+
+#divRemember
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    
+}
+
+#cbRemember
+{
+    width:  1rem;
+    height: 1rem;
+}
+

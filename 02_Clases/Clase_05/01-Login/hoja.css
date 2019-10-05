@@ -1,0 +1,22 @@
+
+
+#imagen-loading
+{
+    /* para poder mover la imagen */
+    position: absolute;
+    left: 40vw;
+    top: 30vh;
+    /* hace la imagen transparente: */
+    opacity: 0.5;
+    /* oculto la imagen: */
+    visibility: hidden;
+}
+
+img
+{
+    /* imagen responsive */
+    
+    width:20vw; /* ajusto el tamaño de la imagen */
+    height: auto;
+
+}

@@ -1,0 +1,324 @@
+html
+{
+    font-size: 62.5%; /* rem como multiplo de 10 en todo el documento */
+}
+
+
+header 
+{
+    /* Con path relativo */
+    background-image: url(./img/header.jpg);
+    /* me centra la imagen medio vertical y horizontal*/
+    background-position: center center;
+    /* cubro los costados */
+    background-size: cover;
+    /* 100 de la pantalla - vh -> del viewpoint (dispositivo) */
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    box-sizing: border-box;
+    padding: 2rem 5rem 2rem 5rem;
+    
+}
+
+body
+{
+    margin: 0px;
+}
+
+
+
+div.encabezado
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+
+nav
+{
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    padding-top: 1vh;
+}
+
+a
+{
+
+    text-decoration: none;    
+    display: inline-block;
+    color: white;
+    font-size: 2vw;
+    margin-right: 2vw;
+
+
+}
+
+
+#logo
+{
+
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+#imagenLogo
+{
+    height: auto;
+    width: 25vw;
+    min-width: 5vw;
+    flex-wrap: nowrap;
+}
+
+
+.tituloHeader
+{
+    margin: 3rem 0 0 10rem;
+
+}
+
+h1
+{
+    color: white;
+    font-family: Arial;
+    text-align: left;
+    font-size: 2.5vw;
+    max-width: 60rem; /* tamaño max */
+    line-height: 2; /* interlineado */
+    
+}
+
+
+h2.info-titulo
+{
+    font-weight: normal;
+    text-align: center;
+    color: grey;
+    font-family: 'Times New Roman';
+    padding-bottom: 2%;
+    font-size: 2vw;
+}
+
+
+.masSobreNosotros
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0 25rem 0 25rem;
+    box-sizing: border-box;
+    
+}
+
+.box
+{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1rem 2rem 1rem;
+    box-sizing: border-box;
+
+}
+
+.imgMasSobreNosotros
+{
+    max-width: 100%;
+    height: auto;
+}
+
+h3
+{
+    font-size: 1.5vw;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+.info-descripcion
+{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    font-size: 1vw;
+}
+
+em
+{
+    color: green;
+    font-style: normal;
+
+}
+
+.box2
+{
+    display: flex;
+    flex-grow:  1;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: center;
+    margin-left: 1%;
+    margin-right: 1%;
+    border-color: grey;
+    border-style: solid;
+    border-width: 0.1vh;
+    box-sizing: border-box;
+}
+
+.box-imagen
+{
+    background-color: rgba(224, 224, 224, 0.931);
+    box-sizing: border-box;
+
+}
+
+
+.box-texto
+{
+    display: flex;
+    flex-direction: column; 
+    padding: 0 4rem 2rem 4rem;
+    background-color: rgba(224, 224, 224, 0.931);
+
+    box-sizing: border-box;
+}
+
+p.txtBoxCasas
+{
+    text-align: left;
+}
+
+input[type="button"].btnVerPropiedad
+{
+    margin: 0 5rem 0 5rem;
+    box-sizing: border-box;
+}
+
+
+p
+{
+    font-family: Arial;
+    font-size: 2vh;
+    text-align: center;
+}
+
+img
+{
+    max-width: 100%;
+    height: auto;
+}
+
+input[type="button"]
+{
+    background-color: orange;
+    color: white;
+    font-size: 10pt;
+    font-weight: bold;
+    border: none;
+    text-align: center;
+    width:  25vh;
+    height: 5vh;
+
+}
+
+.precio
+{
+    color: green;
+    font-weight: bold;
+    text-align: left;
+}
+
+.imagenes
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top:4%;
+    padding-bottom: 4%;
+}
+
+img.img-servicios
+{
+    max-width: 70%;
+}
+
+.precio
+{
+    padding-top:4%;
+    padding-bottom: 4%;
+}
+
+#btnVerTodas
+{
+    background-color: green;
+    margin: 5% 0% 5% 80%;
+    
+}
+
+h2.formulario
+{
+    font-size: 1.8vw;
+}
+
+section.formulario
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* Con path relativo */
+    background-image: url(./img/header.jpg);
+    /* me centra la imagen medio vertical y horizontal*/
+    background-position: center center;
+    /* cubro los costados */
+    background-size: cover;
+    height: 30rem;
+    padding: 5rem 30rem 5rem 30rem;
+    box-sizing: border-box;
+
+    color: white;
+}
+
+p.formulario
+{
+
+    text-align: left;
+}
+
+
+footer
+{
+    display: flex;
+    flex-direction: row;
+    /* Con path relativo */
+    background-image: url(./img/header.jpg);
+    /* me centra la imagen medio vertical y horizontal*/
+    background-position: center center;
+    /* cubro los costados */
+    background-size: cover;
+    padding: 5rem;
+    box-sizing: border-box;
+
+
+}
+
+
+.divFooter
+{
+    display:flex;
+    flex-grow: 1;
+    justify-content: center;
+    box-sizing: border-box;
+
+}
+
+.pFooter
+{
+    color: white;
+
+}
