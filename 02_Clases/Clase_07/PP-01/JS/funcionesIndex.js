@@ -1,6 +1,6 @@
 
 window.addEventListener("load", CargarBotones);
-// window.addEventListener("load", MostrarParametros);
+
 
 function CargarBotones()
 {
@@ -23,6 +23,7 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
+//Muestra/Oculta el div que crea el post
 function MostrarIngreso()
 {
     var divNuevoPost = document.getElementById("divNuevoPost");
