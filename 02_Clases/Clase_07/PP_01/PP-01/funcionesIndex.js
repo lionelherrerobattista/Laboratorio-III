@@ -104,7 +104,7 @@ function CrearDivNewPost(e)
     btnPost = document.createElement("input");
     btnPost.setAttribute("type", "button");
     btnPost.setAttribute("value", "Post");
-    btnPost.addEventListener("click", CrearPost);
+    btnPost.addEventListener("click", GuardarPost);
     divNuevoPost.appendChild(btnPost);
 
     MostrarIngreso();
@@ -113,6 +113,34 @@ function CrearDivNewPost(e)
     btnNewPost.removeEventListener("click", CrearDivNewPost);
     btnNewPost.addEventListener("click", MostrarIngreso);
 
+}
+
+
+function GuardarPost()
+{
+    var titulo;
+    var header;
+    var texto;
+
+    sectionPostsUsuarios = document.getElementById("PostsUsuarios");
+
+    titulo = document.getElementById("txtTitulo");
+    header = document.getElementById("txtHeader");
+    texto = document.getElementById("txtTexto");
+
+    var autor = getParameterByName("email", window.location.href);
+
+    var datosPost = {
+        "title": titulo.value,
+        "header": header.value,
+        "posttext": texto.value,
+        "author": autor
+    }
+
+    GuardarEnServidor(datosPost);
+
+    MostrarIngreso();
+ 
 }
 
 function GuardarEnServidor(objetoJSON)
@@ -135,12 +163,12 @@ function GuardarEnServidor(objetoJSON)
 
             var respuesta = JSON.parse(http.responseText);
             
-            imgLoading.style.visibility = "hidden";
+            // imgLoading.style.visibility = "hidden";
 
-            if(respuesta["respuesta"] === "ok")
+            if(respuesta["title"] != null)
             {
-                
-                alert("objetoJSON guardada");
+
+                CrearPost(respuesta);
 
             }
             else
@@ -163,60 +191,32 @@ function GuardarEnServidor(objetoJSON)
     http.send(JSON.stringify(objetoJSON));
 }
 
-
-function CrearPost()
+function CrearPost(objeto)
 {
-    var titulo;
-    var header;
-    var texto;
-    var tituloPost;
-    var headerPost;
-    var textoPost;
-    var sectionPostsUsuarios;
-    var divPost;
-    var nodoTexto;
-
     sectionPostsUsuarios = document.getElementById("PostsUsuarios");
-
-    titulo = document.getElementById("txtTitulo");
-    header = document.getElementById("txtHeader");
-    texto = document.getElementById("txtTexto");
 
     divPost = document.createElement("div");
 
     tituloPost = document.createElement("h2");
-    nodoTexto = document.createTextNode(titulo.value);
+    nodoTexto = document.createTextNode(objeto["title"]);
     tituloPost.appendChild(nodoTexto);
     divPost.appendChild(tituloPost);
 
     headerPost = document.createElement("h4");
-    nodoTexto = document.createTextNode(header.value);
+    nodoTexto = document.createTextNode(objeto["header"]);
     headerPost.appendChild(nodoTexto);
     divPost.appendChild(headerPost);
 
     textoPost = document.createElement("p");
-    nodoTexto = document.createTextNode("Posted by on");
+    nodoTexto = document.createTextNode(objeto["posttext"]) 
+    textoPost.appendChild(nodoTexto);
+    nuevaLinea = document.createElement("br");
+    textoPost.appendChild(nuevaLinea);
+    nodoTexto = document.createTextNode("Posted by " + objeto["author"] + " on " + objeto["date"]);
     textoPost.appendChild(nodoTexto);
     divPost.appendChild(textoPost);
 
     sectionPostsUsuarios.appendChild(divPost);
-
-    MostrarIngreso();
-
-
-    var autor = getParameterByName("email", window.location.href);
-
-    var datosPost = {
-        "title": titulo.value,
-        "header": header.value,
-        "posttext": texto.value,
-        "author": autor
-    }
-
-    GuardarEnServidor(datosPost);
 }
 
-// function MostrarParametros()
-// {
-//     console.log(getParameterByName("color", window.location.href));
-// }
+
