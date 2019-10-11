@@ -83,3 +83,20 @@ th
     color: azure;
 }
 
+#divAgregarPersona
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30vw;
+    height: 30vh;
+    margin-left: 30vw;
+    margin-top: 20vh;
+    padding-top: 5vh;
+    padding-left: 5vw;
+    position: fixed;
+    border-radius: 0.9rem;
+    background-color: rgb(235, 242, 243);
+    opacity: 0.8;
+}
+
