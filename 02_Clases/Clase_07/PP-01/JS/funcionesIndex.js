@@ -122,14 +122,12 @@ function GuardarPost()
     var titulo;
     var header;
     var texto;
-
-    sectionPostsUsuarios = document.getElementById("PostsUsuarios");
+    var autor;
 
     titulo = document.getElementById("txtTitulo");
     header = document.getElementById("txtHeader");
     texto = document.getElementById("txtTexto");
-
-    var autor = getParameterByName("email", window.location.href);
+    autor = getParameterByName("email", window.location.href);
 
     var datosPost = {
         "title": titulo.value,
@@ -194,30 +192,42 @@ function GuardarEnServidor(objetoJSON)
 
 function CrearPost(objeto)
 {
+    var sectionPostsUsuarios;
+    var divPost;
+    var tituloPost;
+    var headerPost;
+    var textoPost;
+    var datosPost;
+
     sectionPostsUsuarios = document.getElementById("PostsUsuarios");
 
     divPost = document.createElement("div");
 
-    tituloPost = document.createElement("h2");
-    nodoTexto = document.createTextNode(objeto["title"]);
-    tituloPost.appendChild(nodoTexto);
+    tituloPost = crearObjetoConTexto("h2", objeto["title"]);
     divPost.appendChild(tituloPost);
 
-    headerPost = document.createElement("h4");
-    nodoTexto = document.createTextNode(objeto["header"]);
-    headerPost.appendChild(nodoTexto);
+    headerPost = crearObjetoConTexto("h4", objeto["header"]);
     divPost.appendChild(headerPost);
 
-    textoPost = document.createElement("p");
-    nodoTexto = document.createTextNode(objeto["posttext"]) 
-    textoPost.appendChild(nodoTexto);
-    nuevaLinea = document.createElement("br");
-    textoPost.appendChild(nuevaLinea);
-    nodoTexto = document.createTextNode("Posted by " + objeto["author"] + " on " + objeto["date"]);
-    textoPost.appendChild(nodoTexto);
+    textoPost = crearObjetoConTexto("p", objeto["posttext"]);
+
     divPost.appendChild(textoPost);
 
+    datosPost = crearObjetoConTexto("p", "Posted by " + objeto["author"] + " on " + objeto["date"]);
+    divPost.appendChild(datosPost);
+    
     sectionPostsUsuarios.appendChild(divPost);
+}
+
+//Función que crea un objeto DOM con un texto
+//Recibe elemento a crear y el texto que muestra
+function crearObjetoConTexto(tipoElemento, texto)
+{
+    var objeto = document.createElement(tipoElemento);
+    var nodoTexto = document.createTextNode(texto);
+    objeto.appendChild(nodoTexto);
+
+    return objeto;
 }
 
 
