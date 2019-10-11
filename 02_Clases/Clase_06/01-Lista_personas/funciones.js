@@ -99,6 +99,7 @@ function Borrar(e)
     //saco la fila
     e.target.parentNode.parentNode.innerHTML = "";
 
+    //xxx.getElementById("padre").removeChild(hijo);
     // alert("Se borra");
 }
 
@@ -288,30 +289,37 @@ function CrearFila(persona)
     
     //Fila:
     fila = document.createElement("tr");
+
+    Object.keys(persona).forEach(function (key) {
+        columna = document.createElement("td");
+        textoTabla = document.createTextNode(persona[key]);
+        columna.appendChild(textoTabla);
+        fila.appendChild(columna);
+     });
     
-    //Columna nombre:
-    columna = document.createElement("td");
-    textoTabla = document.createTextNode(persona.nombre);
-    columna.appendChild(textoTabla);
-    fila.appendChild(columna);
+    // //Columna nombre:
+    // columna = document.createElement("td");
+    // textoTabla = document.createTextNode(persona.nombre);
+    // columna.appendChild(textoTabla);
+    // fila.appendChild(columna);
 
-    //Columna apellido:
-    columna = document.createElement("td");
-    textoTabla = document.createTextNode(persona.apellido);
-    columna.appendChild(textoTabla);
-    fila.appendChild(columna);
+    // //Columna apellido:
+    // columna = document.createElement("td");
+    // textoTabla = document.createTextNode(persona.apellido);
+    // columna.appendChild(textoTabla);
+    // fila.appendChild(columna);
 
-    //Columna teléfono:
-    columna = document.createElement("td");
-    textoTabla = document.createTextNode(persona.telefono);
-    columna.appendChild(textoTabla);
-    fila.appendChild(columna);
+    // //Columna teléfono:
+    // columna = document.createElement("td");
+    // textoTabla = document.createTextNode(persona.telefono);
+    // columna.appendChild(textoTabla);
+    // fila.appendChild(columna);
 
-    //Columna fecha:
-    columna = document.createElement("td");
-    textoTabla = document.createTextNode(persona.fecha);
-    columna.appendChild(textoTabla);
-    fila.appendChild(columna);
+    // //Columna fecha:
+    // columna = document.createElement("td");
+    // textoTabla = document.createTextNode(persona.fecha);
+    // columna.appendChild(textoTabla);
+    // fila.appendChild(columna);
 
     //Columna Acciones:
     columna = document.createElement("td");

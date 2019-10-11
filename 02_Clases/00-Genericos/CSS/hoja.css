@@ -1,0 +1,85 @@
+body
+{
+    margin:0;
+}
+
+h1
+{
+    font-size: 5vw;
+}
+
+h2
+{
+    font-size: 3vw;
+}
+
+p
+{
+    font-size: 1.5vw;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+a
+{
+    color:inherit;
+    font-size: 1.6vw;
+    margin-left: 2rem;
+    padding: 1rem;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+}
+
+input
+{
+    width:  20vw;
+    height: 5vh;
+    border-radius: 0.2rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 1vw;
+}
+
+input[type="button"]
+{
+    text-align: center;
+    border-style: none;
+    color: white;
+    background-color: rgb(0, 132, 255);
+    cursor: pointer;
+}
+
+input[type="text"]
+{
+    width:  20vw;
+    height: 5vh;
+    border-radius: 0.2rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 1vw;
+
+}
+
+table
+{
+    width: 100%;
+    /* border-collapse: collapse;  saco la division */
+}
+
+th, td
+{
+
+    text-align: left;
+    padding: 8px;
+}
+
+/* Filas pares cambian de color: */
+tr:nth-child(even)
+{
+    background-color: rgb(222, 217, 241);
+}
+
+th
+{
+    background-color: rgb(0, 202, 252);
+    color: azure;
+}
+

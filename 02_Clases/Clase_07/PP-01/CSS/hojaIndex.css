@@ -63,6 +63,7 @@ nav a:hover
 body
 {
     margin:0;
+    margin-bottom: 10vh;
 }
 
 #divNuevoPost
@@ -131,6 +132,30 @@ input[type="button"]
 #PostsUsuarios div
 {
     margin-left: 3rem;
+}
+
+footer
+{
+    position: fixed;
+    width: 100vw;
+    background-color: white;
+    left: 0;
+    bottom: 0;
+    color: grey;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+footer img
+{
+    height: auto;
+    width: 2%;
+}
+
+hr
+{
+    width: 80vw;
 }
 
 
