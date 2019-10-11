@@ -1,7 +1,6 @@
 
 window.addEventListener("load", CargarBotones);
 
-
 function CargarBotones()
 {
     var btnNewPost = document.getElementById("btnNewPost");
@@ -28,7 +27,6 @@ function MostrarIngreso()
 {
     var divNuevoPost = document.getElementById("divNuevoPost");
 
-
     if(divNuevoPost.style.visibility === "visible")
     {
         divNuevoPost.style.visibility = "hidden";
@@ -46,7 +44,6 @@ function CrearDivNewPost(e)
     var titulo;
     var btnNewPost;
     var labelTitle;
-    var nodoTexto;
     var labelHeader;
     var labelText;
     var postTitle;
@@ -57,44 +54,30 @@ function CrearDivNewPost(e)
     divNuevoPost = document.getElementById("divNuevoPost");
     btnNewPost = document.getElementById("btnNewPost");
 
-    e.preventDefault();
+    e.preventDefault();//evito que se recargue la página. Default elemento-> <a>
 
     //encabezado div
-    titulo = document.createElement("h2");
-    nodoTexto = document.createTextNode("Write your new post");
-    titulo.appendChild(nodoTexto);
+    titulo = crearObjetoConTexto("h2", "Write your new post");
     divNuevoPost.appendChild(titulo);
 
     //label de titulo
-    labelTitle = document.createElement("label");
-    nodoTexto = document.createTextNode("Post Title");
-    labelTitle.appendChild(nodoTexto);
+    labelTitle = crearObjetoConTexto("label","Post Title");
     divNuevoPost.appendChild(labelTitle);
 
     //txtTitulo
-    postTitle = document.createElement("input");
-    postTitle.setAttribute("type", "text");
-    postTitle.setAttribute("placeholder", "Título");
-    postTitle.setAttribute("id", "txtTitulo");
+    postTitle = CrearInputTexto("Título", "txtTitulo");
     divNuevoPost.appendChild(postTitle);
 
     //lblHeader
-    labelHeader= document.createElement("label");
-    nodoTexto = document.createTextNode("Post Header");
-    labelHeader.appendChild(nodoTexto);
+    labelHeader= crearObjetoConTexto("label","Post Header");
     divNuevoPost.appendChild(labelHeader);
 
     //txtHeader
-    postHeader = document.createElement("input");
-    postHeader.setAttribute("type", "text");
-    postHeader.setAttribute("placeholder", "Encabezado");
-    postHeader.setAttribute("id", "txtHeader");
+    postHeader = CrearInputTexto("Encabezado", "txtHeader");
     divNuevoPost.appendChild(postHeader);
 
     //lblText
-    labelText= document.createElement("label");
-    nodoTexto = document.createTextNode("Post Text:");
-    labelText.appendChild(nodoTexto);
+    labelText= crearObjetoConTexto("label","Post Text")
     divNuevoPost.appendChild(labelText);
 
     //txtTexto
@@ -136,60 +119,14 @@ function GuardarPost()
         "author": autor
     }
 
-    GuardarEnServidor(datosPost);
+    //Guardo el post en el servidor y muestro los datos en la página:
+    GuardarEnServidor("POST", datosPost, "http://localhost:1337/postearNuevaEntrada");
 
     MostrarIngreso();
  
 }
 
-function GuardarEnServidor(objetoJSON)
-{
-    var http = new XMLHttpRequest();
-    var dirhttp = "http://localhost:1337/postearNuevaEntrada";
-    // var imgLoading = document.getElementById("imagen-loading"); //gif loading
-
-    // //Muestro el spinner
-    // imgLoading.style.visibility = "visible";
-
-    http.onreadystatechange = function()
-    {
-
-        console.log("Llegó respuesta", http.readyState, http.status);
-
-        if(http.readyState === 4 && http.status === 200)
-        {
-            console.log("Tenemos respuesta", http.responseText);
-
-            var respuesta = JSON.parse(http.responseText);
-            
-            // imgLoading.style.visibility = "hidden";
-
-            if(respuesta["title"] != null)
-            {
-
-                CrearPost(respuesta);
-
-            }
-            else
-            {
-
-                alert("no se guardo la objetoJSON");
-            }
-        }
-    }
-
-    console.log(objetoJSON);
-
-    
-    http.open("POST", dirhttp);
-
-    //Cuando uso POST, le tengo que avisar que le paso un JSON:
-    // http.setRequestHeader('Content-Type', "application/JSON"); 
-
-    //paso el JSON a string
-    http.send(JSON.stringify(objetoJSON));
-}
-
+//Función que crea el post utilizando DOM
 function CrearPost(objeto)
 {
     var sectionPostsUsuarios;
@@ -228,6 +165,81 @@ function crearObjetoConTexto(tipoElemento, texto)
     objeto.appendChild(nodoTexto);
 
     return objeto;
+}
+
+
+//Función que crea un input DOM con un texto
+//Recibe placeholder y el id
+function CrearInputTexto(placeholder, id)
+{
+    var inputTexto;
+
+    inputTexto = document.createElement("input");
+
+    inputTexto.setAttribute("type", "text");
+    inputTexto.setAttribute("placeholder", placeholder);
+    inputTexto.setAttribute("id", id);
+
+    return inputTexto;
+}
+
+//Guarda un dato en el Servidor
+//Tipo de petición: GET o POST
+function GuardarEnServidor(tipoPeticion, dato, dirhttp)
+{
+    var http; 
+
+    http = new XMLHttpRequest();
+
+    http.onreadystatechange = function (){
+        
+        VerificarRespuesta(http);
+    }
+
+    switch(tipoPeticion)
+    {
+        case "POST":
+        http.open(tipoPeticion, dirhttp);
+        //Cuando uso POST, aviso que paso texto plano:
+        // http.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
+        http.send(JSON.stringify(dato));
+        break;
+
+        case "GET":
+        // dirhttp = "?nombre= "xx" &//Agrego los parámetros
+        http.open(tipoPeticion, dirhttp);
+        http.send();
+        break;
+
+        default:
+        console.log("No es una petición válida");
+    }
+
+    
+}
+
+//Verifica la respuesta del servidor
+function VerificarRespuesta(http)
+{
+    var respuesta;
+
+    console.log("Llegó respuesta", http.readyState, http.status);
+
+    if(http.readyState === 4 && http.status === 200)
+    {
+        console.log("Tenemos respuesta", http.responseText);
+
+        var respuesta = JSON.parse(http.responseText);
+
+        if(respuesta["title"] != null)
+        {
+            CrearPost(respuesta);
+        }
+        else
+        {
+            alert("no se guardo la objetoJSON");
+        }
+    }   
 }
 
 

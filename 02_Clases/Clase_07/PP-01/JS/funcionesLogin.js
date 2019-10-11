@@ -63,6 +63,8 @@ function GuardarEnServidor(tipoPeticion, dato, dirhttp)
 function VerificarRespuesta(http, dato)
 {
 
+    var url = "";
+
     console.log("Llegó respuesta", http.readyState, http.status);
 
     if(http.readyState === 4 && http.status === 200)
@@ -74,7 +76,7 @@ function VerificarRespuesta(http, dato)
 
         if(respuesta["autenticado"] === "si")
         {
-            var url = "index.html";
+            url = "index.html";
 
             //Paso los parámetros por la url
             url += "?" + "color=" + respuesta["preferencias"]["color"] +
