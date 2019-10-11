@@ -128,9 +128,9 @@ function CrearFila(dato)
     //Fila:
     fila = document.createElement("tr");
 
-    Object.keys(persona).forEach(function (key) {
+    Object.keys(dato).forEach(function (key) {
         
-        columna = crearObjetoConTexto("td", peronsa[key]);
+        columna = crearObjetoConTexto("td", dato[key]);
         fila.appendChild(columna);
 
      });
