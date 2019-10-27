@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Poner SIEMPRE JQuery primero -->
+    <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/funciones.js"></script>
+    <link rel="stylesheet" href="./css/hoja.css">
+    <title>Tarjetas</title>
+</head>
+<body>
+        <div id="contenedorPersona">
+            <input type="button" value="x" id="botonCerrar">
+                        
+                <label for="txtNombre">Nombre</label>
+                
+                <input type="text" name="Nombre" id="txtNombre" placeholder="Tu nombre...">
+               
+                <label for="txtApellido">Apellido</label>
+                
+                <input type="text" name="Apellido" id="txtApellido" placeholder="Tu apellido...">
+                
+                <div id="btnSexo">
+                    <input type="radio" name="gender" value="Male" id="rdMale">
+                    <label for="rdMale">Male</label>
+                    <input type="radio" name="gender" value="Female" id="rdFemale">
+                    <label for="rdFemale">Female</label>
+                </div>
+                <div id="btnOpciones">
+                    <input type="button" value="Eliminar" id="btnEliminar" class="btn">
+                    <input type="button" value="Modificar" id="btnModificar" class="btn">
+                </div>                             
+        </div>
+
+
+        <div class="spinner">
+            <img src="./img/spinner.gif">
+        </div>
+        
+    <div id="cards">
+
+    </div>
+
+    
+
+    
+</body>
+</html>
