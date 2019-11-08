@@ -1058,17 +1058,71 @@ var datos =[
 
   // Retornar el promedio de edad de los usuarios (number)
   lib.userAgeAverage = function () {
+    var acumuladorEdades = datos.reduce(function(total, persona){
+      return total += persona.age;
+    }, 0);
+
+    return acumuladorEdades / datos.length;
   
   };
 
   // Retornar el promedio de edad de los usuarios hombres (number)
   lib.userMaleAgeAverage = function () {
-    
+    var acumuladorEdades = datos.reduce(function(total, persona){
+      if(persona.gender == 'male')
+      {
+        return total += persona.age;
+      }
+      else
+      {
+        return total;
+      }
+        
+    }, 0);
+
+    var totalHombres = datos.reduce(function(total, persona){
+      if(persona.gender == 'male')
+      {
+        return total += 1;
+      }
+      else
+      {
+        return total;
+      }
+        
+    }, 0);
+
+    return acumuladorEdades / totalHombres;
   
   };
 
   // Retornar el promedio de edad de los usuarios mujeres (number)
   lib.userFemaleAgeAverage = function () {
+    var acumuladorEdades = datos.reduce(function(total, persona){
+      if(persona.gender == 'female')
+      {
+        return total += persona.age;
+      }
+      else
+      {
+        return total;
+      }
+        
+    }, 0);
+
+    var totalMujeres = datos.reduce(function(total, persona){
+      if(persona.gender == 'female')
+      {
+        return total += 1;
+      }
+      else
+      {
+        return total;
+      }
+        
+    }, 0);
+
+    return acumuladorEdades / totalMujeres;
   
   };
 
