@@ -1032,28 +1032,38 @@ var datos =[
   // Retornar un objeto que contenga solo el nombre y la edad (name y age) del usuario 
   // mas grande.
   lib.olderUser = function () {
-    edadMayor = datos.reduce(function (auxEdadMayor, persona){
-      if(persona.age > auxEdadMayor)
-      {
-        auxEdadMayor = persona.age;
+
+    return datos.reduce(function(older, item){
+      if(older.age < item.age){
+        return {name:item.name, age:item.age}; //piso el objeto si se cumple la condicion
+      }else{
+        return older;//sino devuelve el mismo
       }
 
-      return auxEdadMayor;
-    }, 0);
+    }, {name:"", age:0});// se inicializa
 
-    return datos.filter(function(persona){
-      return persona.age == edadMayor;
-    }).map(function(persona){
-      persona = {
-        'name': persona.name,
-        'age': persona.age
+    // edadMayor = datos.reduce(function (auxEdadMayor, persona){
+    //   if(persona.age > auxEdadMayor)
+    //   {
+    //     auxEdadMayor = persona.age;
+    //   }
 
-      }
+    //   return auxEdadMayor;
+    // }, 0);
 
-      return persona;
+    // return datos.filter(function(persona){
+    //   return persona.age == edadMayor;
+    // }).map(function(persona){
+    //   persona = {
+    //     'name': persona.name,
+    //     'age': persona.age
+
+    //   }
+
+    //   return persona;
       
 
-    });
+    // });
   };
 
   // Retornar el promedio de edad de los usuarios (number)
@@ -1130,7 +1140,10 @@ var datos =[
   // cada property del objeto es el nombre de una etiqueta
   // y el value es la cantidad de usuarios que tienene esa etiqueta
   lib.tagCloud = function () {
-    
+    //armar json vacio
+    //juntar array de todas las etiquetas
+    //push
+    //reduce
   };
   
   console.log(lib);
