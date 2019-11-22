@@ -1,0 +1,26 @@
+
+#formulario{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    height: 50vh;
+    width: 50vw;
+    padding-left: 20vw;
+    padding-top: 5vh;
+}
+
+.labelInput{
+    display: flex;
+    flex-direction: row;
+}
+
+label{
+    margin-right: 10vw;
+}
+
+input[type='button']{
+    height: 6vh;
+    width: 6vw;
+    margin-left: 40vw;
+}
