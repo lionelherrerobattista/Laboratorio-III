@@ -17,6 +17,9 @@ var personas;
             _this.cuil = cuil;
             return _this;
         }
+        Profesor.prototype.getCuil = function () {
+            return this.cuil;
+        };
         return Profesor;
     }(personas.Persona));
     personas.Profesor = Profesor;

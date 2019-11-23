@@ -4,46 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="./funciones.js"></script>
+    <script type="text/javascript" src="./Persona.js"></script>
+    <script type="text/javascript" src="./Profesor.js"></script>
+    <script type="text/javascript" src="./Alumno.js"></script>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./hoja.css">
     <title>Document</title>
 </head>
 <body>
-    <div id="formulario">
+    <div class="container">
 
-        <div class="labelInput">
-                <label for="btnNombre">Nombre:</label>
-                <input type="text" id="btnNombre">
+        <div class="row align-items-center divRow my-4">
+                <label class="col-3" for="txtNombre">Nombre:</label>
+                <input class="col-3" type="text" id="txtNombre">
         </div>
         
 
-        <div class="labelInput">
-                <label for="btnApellido">Apellido:</label>
-                <input type="text" id="btnApellido">
+        <div class="row align-items-center divRow my-4">
+                <label class="col-3" for="txtApellido">Apellido:</label>
+                <input class="col-3" type="text" id="txtApellido">
         </div>
        
 
-        <div class="labelInput">
-                <label for="btnApellido">Tipo:</label>
-                <select>
+        <div class="row align-items-center divRow my-4">
+                <label class="col-3">Tipo:</label>
+                <select class="col-3" id="cmbTipo">
                     <option value="Alumno">Alumno</option>
                     <option value="Profesor">Profesor</option>
                 </select>
         </div>
         
 
-        <div class="labelInput">
-                <label for="btnLegajo">Legajo:</label>
-                <input type="text" id="btnLegajo">
+        <div class="row align-items-center divRow my-4">
+                <label class="col-3" for="txtLegajo">Legajo:</label>
+                <input class="col-3" type="text" id="txtLegajo">
         </div>
 
-        <input type="button" value="Agregar">
+        <div class="row justify-content-end divRow my-4">
+            <input class="col-3" type="button" value="Agregar" id="btnAgregar">
+        </div>
 
-        <table>
-            <tr>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Legajo</th>
-            </tr>
+       
+        <table class='table'>
+            <thead>
+                <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Legajo</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+
+            </tbody>
+            
         </table>
       
     </div>

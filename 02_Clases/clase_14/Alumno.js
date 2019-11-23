@@ -17,6 +17,9 @@ var personas;
             _this.legajo = legajo;
             return _this;
         }
+        Alumno.prototype.getLegajo = function () {
+            return this.legajo;
+        };
         return Alumno;
     }(personas.Persona));
     personas.Alumno = Alumno;
