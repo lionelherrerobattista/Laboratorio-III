@@ -36,14 +36,23 @@ var personas;
         else {
             columnaLegajo.append(persona.getCuil());
         }
+        var botonEliminar = $("<input></input>");
+        botonEliminar.attr("type", "button");
+        botonEliminar.attr("value", "Eliminar");
+        botonEliminar.click(eliminar);
         fila.append(columnaNombre);
         fila.append(columnaApellido);
         fila.append(columnaLegajo);
+        fila.append(botonEliminar);
         tBody.append(fila);
         console.log(listaPersonas);
     }
     personas.agregar = agregar;
-    function eliminar() {
+    function eliminar(event) {
+        // let fila = event.target.parent.parent;
+        // let tbody = document.getElementById("tbody");
+        // tbody.removeChild(fila);
+        console.log(event.target);
     }
     personas.eliminar = eliminar;
     function filtrar() {

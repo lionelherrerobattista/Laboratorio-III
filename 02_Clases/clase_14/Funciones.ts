@@ -61,9 +61,16 @@ namespace personas
             columnaLegajo.append((<Profesor>persona).getCuil());
         }
 
+        let botonEliminar = $("<input></input>");
+
+        botonEliminar.attr("type", "button");
+        botonEliminar.attr("value", "Eliminar");
+        botonEliminar.click(eliminar);
+
         fila.append(columnaNombre);
         fila.append(columnaApellido);
         fila.append(columnaLegajo);
+        fila.append(botonEliminar);
         tBody.append(fila);
 
         console.log(listaPersonas);
@@ -72,9 +79,16 @@ namespace personas
 
 
 
-    export function eliminar()
+    export function eliminar(event)
     {
+        // let fila = event.target.parent.parent;
+        // let tbody = document.getElementById("tbody");
 
+        // tbody.removeChild(fila);
+
+        console.log(event.target);
+
+        
     }
     
     export function filtrar()
