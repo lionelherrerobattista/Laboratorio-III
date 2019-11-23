@@ -8,7 +8,6 @@ var personas;
     }
     personas.CargarPagina = CargarPagina;
     function agregar() {
-        console.log("btnagregaer");
         var nombre = String($("#txtNombre").val()); //tengo que castear a string
         var apellido = String($("#txtApellido").val());
         var tipo = String($("#cmbTipo").find('option:selected').text());
@@ -36,23 +35,24 @@ var personas;
         else {
             columnaLegajo.append(persona.getCuil());
         }
+        var columnaEliminar = $("<td></td>");
         var botonEliminar = $("<input></input>");
         botonEliminar.attr("type", "button");
         botonEliminar.attr("value", "Eliminar");
         botonEliminar.click(eliminar);
+        columnaEliminar.append(botonEliminar);
         fila.append(columnaNombre);
         fila.append(columnaApellido);
         fila.append(columnaLegajo);
-        fila.append(botonEliminar);
+        fila.append(columnaEliminar);
         tBody.append(fila);
         console.log(listaPersonas);
     }
     personas.agregar = agregar;
     function eliminar(event) {
-        // let fila = event.target.parent.parent;
-        // let tbody = document.getElementById("tbody");
-        // tbody.removeChild(fila);
-        console.log(event.target);
+        var fila = $(event.target).parent().parent();
+        console.log(fila);
+        fila.remove();
     }
     personas.eliminar = eliminar;
     function filtrar() {
