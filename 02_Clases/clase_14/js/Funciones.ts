@@ -1,11 +1,13 @@
 namespace personas
 {
-    var listaPersonas:Array<Persona> = new Array<Persona>();
+    var listaPersonas:Array<Persona>;
 
     $("document").ready(CargarPagina);
 
     export function CargarPagina():void{
 
+        //Inicializo lista cuando cargo la página
+        listaPersonas = new Array<Persona>();
         
         let btnAgregar = $("#btnAgregar");
 
@@ -82,17 +84,66 @@ namespace personas
     {
         let fila = $(event.target).parent().parent();
 
-        console.log(fila);
+        //tomo el legajo de la columna legajo
+        let legajo = $(fila.children()[2]).text();
+
+        //Elimino la persona de la lista
+        listaPersonas.forEach(function (persona, indice) {
+
+            let auxPersona = persona;
+
+            console.log(persona);            
+
+
+            //hacer hidden con el tipo (legajo repetido)
+            if(persona instanceof Alumno)
+            {
+                if((<Alumno>persona).getLegajo() == legajo)
+                {
+                    listaPersonas.splice(indice, 1);//borro ese elemento del array
+
+                    console.log("elimino alumno"); 
+                }
+
+            }
+            else
+            {
+                if((<Profesor>persona).getCuil() == legajo)
+                {
+                    listaPersonas.splice(indice, 1);
+
+                    console.log("elimino profesor"); 
+                }
+
+                 
+            }
+            
+        })
+
+        
         
         fila.remove();
 
-        
+      
 
         
     }
     
     export function filtrar()
     {
+        let filtro;
+        let listaFiltrada;
+
+        switch(filtro)
+        {
+            case 'alumnos':
+                listaFiltrada = listaPersonas.filter(function () { 
+
+                });
+                break;
+            case 'profesores':
+                break;
+        }
 
     }
 }

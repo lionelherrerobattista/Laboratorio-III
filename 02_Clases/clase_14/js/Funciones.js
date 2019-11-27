@@ -1,8 +1,10 @@
 var personas;
 (function (personas) {
-    var listaPersonas = new Array();
+    var listaPersonas;
     $("document").ready(CargarPagina);
     function CargarPagina() {
+        //Inicializo lista cuando cargo la página
+        listaPersonas = new Array();
         var btnAgregar = $("#btnAgregar");
         btnAgregar.click(agregar);
     }
@@ -51,11 +53,40 @@ var personas;
     personas.agregar = agregar;
     function eliminar(event) {
         var fila = $(event.target).parent().parent();
-        console.log(fila);
+        //tomo el legajo de la columna legajo
+        var legajo = $(fila.children()[2]).text();
+        //Elimino la persona de la lista
+        listaPersonas.forEach(function (persona, indice) {
+            var auxPersona = persona;
+            console.log(persona);
+            //hacer hidden con el tipo (legajo repetido)
+            if (persona instanceof personas.Alumno) {
+                if (persona.getLegajo() == legajo) {
+                    listaPersonas.splice(indice, 1); //borro ese elemento del array
+                    console.log("elimino alumno");
+                }
+            }
+            else {
+                if (persona.getCuil() == legajo) {
+                    listaPersonas.splice(indice, 1);
+                    console.log("elimino profesor");
+                }
+            }
+        });
         fila.remove();
     }
     personas.eliminar = eliminar;
     function filtrar() {
+        var filtro;
+        var listaFiltrada;
+        switch (filtro) {
+            case 'alumnos':
+                listaFiltrada = listaPersonas.filter(function () {
+                });
+                break;
+            case 'profesores':
+                break;
+        }
     }
     personas.filtrar = filtrar;
 })(personas || (personas = {}));
