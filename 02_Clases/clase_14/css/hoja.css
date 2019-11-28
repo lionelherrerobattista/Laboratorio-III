@@ -1,8 +1,6 @@
 
 
 
-input[type='button']{
-    height: 6vh;
-    width: 6vw;
-
+body{
+    background-color: rgb(206, 202, 202);
 }
