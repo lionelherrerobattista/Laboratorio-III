@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/Funciones.js"></script>
+    <script type="text/javascript" src="./js/Vehiculo.js"></script>
+    <script type="text/javascript" src="./js/Auto.js"></script>
+    <script type="text/javascript" src="./js/Camioneta.js"></script>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/hoja.css">
+    <title>ABM Vehiculos</title>
+</head>
+<body>
+
+    <div class="col justify-content-center" id="inputsABM">
+        
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Id</span>
+            </div>
+            <input type="text" class="form-control" id="txtId" disabled>
+        </div>
+
+        <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Marca</span>
+                </div>
+                <input type="text" class="form-control" id="txtMarca">
+        </div>
+
+        <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Modelo</span>
+                </div>
+                <input type="text" class="form-control" id="txtModelo">
+        </div>
+
+
+        <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Precio</span>
+                </div>
+                <input type="text" class="form-control" id="txtPrecio">
+        </div>
+
+        <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Puertas</span>
+                </div>
+                <input type="text" class="form-control" id="txtPuertas">
+        </div>
+
+        <div class="input-group  col-2">
+                <input type="checkbox" class="mr-3" name="cuatroXcuatro" id="cuatroXcuatro">
+                <label>4x4</label>
+        </div>
+
+    </div id="divBotones">
+
+        <input class="btn btn-success mr-3" type="button" value="Agregar" id="btnAgregar">
+
+        <input class="btn btn-primary mr-3" type="button" value="Calcular Promedio" id="btnPromedio">
+
+        <select class="custom-select" id="cmbFiltro">
+                <option value="Todos">Todos</option>
+                                     
+            </select>
+            
+    </div>
+   
+
+    <table class='table table-striped table-hover text-center' id="tabla">
+       
+    </table>
+      
+    
+    
+</body>
+</html>
